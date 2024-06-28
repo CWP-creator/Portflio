@@ -1,0 +1,255 @@
+@font-face {
+    font-family: header;
+    src: url(../fonts/font.ttf);
+}
+@font-face {
+    font-family: regg;
+    src: url(../fonts/reg.ttf);
+}
+body {
+    background-color: #f0f8ff;
+}
+header {
+    padding: 10px 0;
+    text-align: center;
+    margin-right: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    width: 100%;
+}
+
+header nav ul {
+    list-style-type: none;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 25px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #727272;
+    font-family: header;
+    font-size: 19px;
+}
+.active {
+    text-decoration: none;
+    color: #000;
+    font-family: header;
+    font-size: 21px;
+    text-shadow: 0.5px 0.5px 0.5px black;
+}
+.themebtn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    margin-top: -44px;
+    margin-left: 650px;
+    cursor: pointer;
+}
+
+body, #theememem, .introtext .h1, .introtext .h2, .htt, .cscscs,.figg, .intext,.btn,.btnn,.iconlist,.blend {
+    transition: background-color 1s ease, box-shadow 1s ease;
+}
+.navtex a {
+    transition: color 1s ease;
+}
+.h1 {
+    position: absolute;
+    font-size: 55px;
+    font-family: regg, "serif";
+    left: 90px;
+    top: 280px;
+    color: #0D1717;
+}
+.h2 {
+    position: absolute;
+    font-size: 50px;
+    font-family: header;
+    left: 168px;
+    top: 282px;
+    color: #0D1717;
+}
+.wave {
+    position: absolute;
+    z-index: 1;
+    top: 315px;
+    left: 572px;
+    height: 55px;
+    width: 55px;
+}
+.avatar {
+    width: 350px;
+    height: 350px;
+    border-radius: 10px;
+    top: 275px;
+    left: 1020px;
+    position: absolute;
+    z-index: 1;
+}
+.intro-image img:hover {
+    background-color: #000;
+}
+.temp {
+    top: 270px;
+    left: 1080px;
+    position: absolute;
+    z-index: 1;
+    color: black;
+    font-size: 25px;
+}
+.htt {
+    object-fit: contain;
+    top: 250px;
+    left: 1320px;
+    position: absolute;
+    z-index: 2;
+    background-color: #f0f8ff;
+    border-radius: 100px;
+}
+.cscscs {
+    border-radius: 100px;
+    background-color: #d8edff94;
+    top: 650px;
+    left: 1150px;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    z-index: 3;
+}
+.cscscs img {
+    position: absolute;
+    object-fit: contain;
+    width: 70px;
+    height: 70px;
+    top: 5px;
+    left: 5px;
+    z-index: 4;
+}
+.figg{
+    border-radius: 100px;
+    background-color: #d8edff94;
+    top: 572px;
+    left: 1380px;
+    width: 80px;
+    height:80px;
+    position: absolute;
+    z-index: 3;
+}
+.fig{
+    position: absolute;
+    object-fit: contain;
+    width: 60px;
+    height:60px;
+    top: 12px;
+    left: 15px;
+    z-index: 4;
+    
+}
+.intext{
+    position: absolute;
+    font-family: header;
+    font-size: 23px;
+    left: 92px;
+    top: 370px;
+    width: 50%;
+    line-height: 115%;
+    font-weight: 100;
+}
+.buttons .btn {
+    background-color: #0f1721;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    position:absolute;
+    top: 495px;
+    left: 90px;
+    font-family: header;
+    text-align: center;
+}
+.buttons .btnn{
+    background-color: #f0f8ff;
+    color: #0f1721;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bolder;
+    position:absolute;
+    top: 495px;
+    left: 250px;
+    font-family: header;
+    width: 80px;
+    height: 22px;
+    text-align: center;
+}
+.iconlist {
+    position:absolute;
+    left: 45px;
+    bottom: 50px;
+    
+}
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+    color:#0f1721;
+}
+.blend{
+    border-radius: 100px;
+    background-color: #d8edff94;
+    top: 190px;
+    left: 1050px;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    z-index: 3;
+}
+.blendd{
+    position: absolute;
+    object-fit: contain;
+    width: 60px;
+    height:60px;
+    top: 8px;
+    left: 8px;
+    z-index: 4;
+}
+.about-conatiner{
+    margin-top: 5000px;
+}
+.faf{
+    display: none;
+
+}
+.faf li a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+@media (max-width: 1365px) {
+ .themebtn{
+    right: 100px;        
+} 
+}
+@media (max-width: 880px) {
+    .themebtn{
+        right: 7%;
+    }    
+    ul li a{
+        display: none;
+    }
+    .faf {
+        display: block;
+        float: none;
+        position: absolute;
+        top: 20px;
+        left: 15px;
+    }
+}

@@ -1,10 +1,10 @@
 @font-face {
     font-family: header;
-    src: url(./fonts/font.ttf);
+    src: url(../fonts/font.ttf);
 }
 @font-face {
     font-family: regg;
-    src: url(./fonts/reg.ttf);
+    src: url(../fonts/reg.ttf);
 }
 body {
     background-color: #f0f8ff;

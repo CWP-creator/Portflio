@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../assets/js/index.js"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .down {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-height: 10px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            left: 0;
+            top: 100%;
+        }
+        .down a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: header;
+        }
+        .down a:hover {background-color: #f1f1f1}
+        .show {
+            display: block;
+            
+        }
+        .upper{
+            position: absolute;
+            right:-430px;
+            top: -50px;
+            font-size: 40px;
+            font-family: Header;
+        }
+    </style>
+    <script>
+        function dropdown() {
+            var dropdownElement = document.getElementById("demo");
+            dropdownElement.classList.toggle("show");
+        }
+    </script>
+</head>
+<body>
+    <header id="theememem">
+        <nav>
+            <ul class="navtex">
+                <li><a class="active" href="../pages/index.html">Home</a></li>
+                <li><a href="../pages/about.html">About</a></li>
+                <li><a href="../pages/project.html">Project</a></li>
+                <li><a href="../pages/contact.html">Contact</a></li>     
+            </ul>
+        </nav>
+        <img id="themeh" onclick="myfunction()" class="themebtn" src="../assets/img/dark.webp" alt="">
+        <div class="faf">
+            <button>
+                <i onclick="dropdown()" style="font-size:24px" class="fa">&#xf0c9;</i>
+            </button>
+            <div id="demo" class="down">
+                <a href="../pages/index.html">Home</a>
+                <a href="../pages/about.html">About</a>
+                <a href="#about">Project</a>
+                <a href="#contact">Experience</a>
+                <a href="#work">Contact</a> 
+            </div>
+            <p class="upper">Pratyush Dulal</p>
+        </div>
+    </header>
+    <div class="introtext">
+        <h1 class="h1">Hi,</h1><h2 class="h2">I am Pratyush Dulal</h2>
+    </div>
+    <div class="intropic">
+        <p class="temp">Temporary Image</p>
+        <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/168/168726.png" alt="">
+        <img class="htt" style="width: 70px; height: 70px;" src="https://jigarsable.vercel.app/_next/image?url=https%3A%2F%2Fimg.icons8.com%2Fcolor%2F144%2F000000%2Fhtml-5--v1.png&w=128&q=75" alt="">
+        <div class="cscscs">
+            <img class="csss" style="width: 70px; height: 70px;" src="https://img-resize-cdn.joshmartin.ch/768x0%2Cc3537b9f46b5f6055fbc8b4cd03b6b2cc63fc2eefd3d8cd9f0c9f99a5933e496/https://joshmartin.ch/app/uploads/2017/10/css3.svg" alt="">
+        </div>
+        <div class="figg">
+            <img class="fig" src="https://s3-alpha.figma.com/hub/file/1481185752/fa4cd070-6a79-4e1b-b079-8b9b76408595-cover.png" alt="">
+        </div>  
+        <div class="blend">
+            <img class="blendd" style="width: 70px; height: 70px;" src="../assets/img/png-clipart-blender-computer-icons-rendering-blender-3d-computer-graphics-text-thumbnail-removebg-preview.png" alt="">
+        </div>
+    </div>
+    <div class="intext">
+        <p>I'm a passionate student interested in web development, UI/UX design, and 3D art. I've created user-friendly websites, intuitive interfaces, and detailed 3D models. Let's connect!</p>
+    </div>
+    <div class="buttons">
+        <a href="#work" class="btn">View My Work</a>
+        <a href="#contact" class="btnn">Contact Me</a>
+    </div>
+    <div class="iconlist">
+        <div class="icon-container">
+            <a href=""><i style="font-size:26px; color:#0f1721;" class="fa">&#xf16d;</i></a>
+        </div>
+        <div class="icon-container">
+            <a href=""><i style="font-size:26px; color:#0f1721;" class="fa">&#xf0e1;</i></a>
+        </div>
+        <div class="icon-container">
+            <a href=""><i style="font-size:26px; color:#0f1721;" class="fa">&#xf09b;</i></a>
+        </div>
+        <div class="icon-container">
+            <a href=""><i style="font-size:26px; color:#0f1721;" class="fa">&#xf099;</i></a>
+        </div>
+    </div>
+    
+</body>
+</html>

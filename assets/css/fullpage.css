@@ -230,6 +230,9 @@ body, #theememem, .introtext .h1, .introtext .h2, .htt, .cscscs,.figg, .intext,.
     left: 8px;
     z-index: 4;
 }
+.home-container{
+    padding: 1503.200;
+}
 .about-conatiner{
     margin-top: 5000px;
 }
@@ -238,6 +241,9 @@ body, #theememem, .introtext .h1, .introtext .h2, .htt, .cscscs,.figg, .intext,.
 }
 .fa{
     font-size:24px;
+}
+i.fa {
+    color: black;
 }
 .faf li a {
     color: black;
@@ -387,20 +393,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 890px;
+    padding-top: 103px;
 }
 .about-content {
     display: flex;
     align-items: center;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
     margin-top: 20px;
 }
 .hahah{
     position: absolute;
-    top:875px;
-    left: 45%;
+    top:813px;
+    left: 41.5%;
     font-size: 50px;
 }
 .profile-pic {
@@ -447,7 +453,7 @@ body {
 }
 .about-containers {
     gap: 100px;
-    margin-left: 17%;
+    margin-left: 15%;
     width: 1050px;
     margin-top: 43px;
 }
@@ -679,4 +685,14 @@ button:hover {
     width: 551px;
     height: 400px;
     object-fit: cover;
+}
+html {
+    scroll-padding-top: 100px; 
+    scroll-behavior: smooth;   
+}
+#home{
+ padding: auto;
+}
+.about-content {
+    margin-bottom: 20px;
 }

@@ -1,202 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="./assets/js/fullpage.js"></script>
-    <link rel="stylesheet" href="./assets/css/fullpage.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pratyush Dulal | Content Creator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #222;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: #007bff;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header .navtex {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    header .navtex a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    header .navtex a:hover {
+      color: #ffde59;
+    }
+
+    .home-container {
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    .introtext .h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    .introtext .h2 {
+      font-size: 2rem;
+      margin: 10px 0;
+    }
+
+    .introtext .h3 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #555;
+    }
+
+    .intext p {
+      max-width: 600px;
+      margin: 20px auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .buttons {
+      margin: 20px 0;
+    }
+
+    .btn, .btnn {
+      padding: 10px 20px;
+      margin: 5px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .btn {
+      background: #007bff;
+      color: white;
+    }
+
+    .btnn {
+      background: #ffde59;
+      color: #222;
+    }
+
+    .iconlist {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .iconlist i {
+      font-size: 1.5rem;
+      color: #007bff;
+      transition: 0.3s;
+    }
+
+    .iconlist i:hover {
+      color: #ffde59;
+    }
+
+    section {
+      padding: 60px 20px;
+    }
+
+    .about-container {
+      text-align: center;
+    }
+
+    .profile-details h1 {
+      margin: 10px 0;
+      font-size: 2rem;
+    }
+
+    .profile-details h2 {
+      font-weight: 400;
+      color: #555;
+    }
+
+    .about-details-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .details-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      width: 250px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .projects, .brands {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .project, .brand {
+      background: #fff;
+      border-radius: 10px;
+      padding: 15px;
+      width: 280px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .project img, .brand img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .tags {
+      margin-top: 10px;
+    }
+
+    .tag {
+      background: #007bff;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin: 2px;
+      font-size: 0.8rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .navtex {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .introtext .h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header id="theememem"> 
-    <nav>
-        <ul class="navtex">
-            <li ><a  href="#Home" onclick="goToSection('Home')">Home</a></li>
-            <li><a href="#about" onclick="goToSection('about')">About</a></li>
-            <li><a href="#project" onclick="goToSection('project')">Projects</a></li>
-            <li><a href="#contact" onclick="goToSection('contact')">Contact</a></li>    
-        </ul>
-    </nav>
-    <img id="themeh" onclick="myfunction()" class="themebtn" src="./assets/img/dark.webp" alt="">
-    <div class="faf">
-        <button class="jay">
-            <i onclick="dropdown()" class="fa">&#xf0c9;</i>
-        </button>
-        <div id="demo" class="down">
-            <a href="./pages/index.html">Home</a>
-            <a href="./pages/about.html">About</a>
-            <a href="#project" onclick="goToSection('project')">Projects</a>
-            <a href="#contact" onclick="goToSection('contact')">Contact</a>
-        </div>
-        <p class="upper">Pratyush Dulal</p>
-    </div>
+<header> 
+  <nav>
+      <ul class="navtex">
+          <li><a href="#Home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#project">Projects</a></li>
+          <li><a href="#brands">Brands</a></li>
+          <li><a href="#contact">Contact</a></li>    
+      </ul>
+  </nav>
+  <p class="upper"><b>Pratyush Dulal</b></p>
 </header>
 
-<section id="Home" style="height: 800px;">
+<section id="Home">
   <div class="home-container">
-        <div class="intro">
-            <div class="introtext">
-                <h1 class="h1">Hi,</h1><h2 class="h2">I am Pratyush Dulal</h2>
-            </div>
-          <div class="intropic">
-            <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/168/168726.png" alt="">
-            <img class="htt" src="https://jigarsable.vercel.app/_next/image?url=https%3A%2F%2Fimg.icons8.com%2Fcolor%2F144%2F000000%2Fhtml-5--v1.png&w=128&q=75" alt="">
-            <div class="cscscs">
-              <img class="csss" src="https://img-resize-cdn.joshmartin.ch/768x0%2Cc3537b9f46b5f6055fbc8b4cd03b6b2cc63fc2eefd3d8cd9f0c9f99a5933e496/https://joshmartin.ch/app/uploads/2017/10/css3.svg" alt="">
-            </div>
-            <div class="figg">
-              <img class="fig" src="https://s3-alpha.figma.com/hub/file/1481185752/fa4cd070-6a79-4e1b-b079-8b9b76408595-cover.png" alt="">
-            </div>
-            <div class="blend">
-              <img class="blendd" src="./assets/img/png-clipart-blender-computer-icons-rendering-blender-3d-computer-graphics-text-thumbnail-removebg-preview.png" alt="">
-            </div>
-          </div>
-          <div class="intext">
-            <p>I am a passionate student interested in web development, UI/UX design, and 3D art. I've created user-friendly websites, intuitive interfaces, and detailed 3D models. Let's connect!</p>
-          </div>
-        </div>
-        <div class="buttons">
-          <a href="#project" onclick="goToSection('projects')" class="btn">View My Work</a>
-          <a href="#contact" class="btnn">Contact Me</a>
-        </div>
-        <div class="iconlist" >
-          <div  class="icon-container">
-            <a target="_blank" href="https://www.instagram.com/pratyush_dulal/"><i class="fa">&#xf16d;</i></a>
-          </div>
-          <div class="icon-container">
-            <a target="_blank" href="https://www.linkedin.com/in/pratyush-dulal/"><i class="fa">&#xf0e1;</i></a>
-          </div>
-          <div  class="icon-container">
-            <a target="_blank" href="https://github.com/CWP-creator"><i class="fa">&#xf09b;</i></a>
-          </div>
-          <div  class="icon-container">
-            <a target="_blank" href="https://x.com/pratyushdulal69"><i class="fa">&#xf099;</i></a>
-          </div>
-        </div>
-        </div>
+      <div class="introtext">
+          <h1 class="h1">Hi,</h1>
+          <h2 class="h2">I’m <span style="color:#007bff;">Pratyush Dulal</span></h2>
+          <h3 class="h3">Content Creator | Fitness Enthusiast | Digital Media</h3>
+      </div>
+      <div class="intext">
+        <p>
+          I’m a <b>content creator</b> passionate about <b>gym, lifestyle, and digital media</b>.  
+          I’ve worked with brands like <b>Bhagwan Essentials</b>, <b>Karmalaya Foundation</b>, and <b>Shivapuri Fabric</b>  
+          delivering engaging campaigns, reels, and creative projects.  
+        </p>
+      </div>
+      <div class="buttons">
+        <a href="#project" class="btn">View My Work</a>
+        <a href="#contact" class="btnn">Contact Me</a>
+      </div>
+      <div class="iconlist">
+        <a target="_blank" href="https://www.instagram.com/pratyush_dulal/"><i class="fa">&#xf16d;</i></a>
+        <a target="_blank" href="https://www.linkedin.com/in/pratyush-dulal/"><i class="fa">&#xf0e1;</i></a>
+        <a target="_blank" href="https://github.com/CWP-creator"><i class="fa">&#xf09b;</i></a>
+        <a target="_blank" href="https://x.com/pratyushdulal69"><i class="fa">&#xf099;</i></a>
+      </div>
+  </div>
 </section>
 
 <section id="about">
   <div class="about-container">
-      <div class="about-content">
-          <div class="profile-pic">
-              <img src="https://cdn-icons-png.flaticon.com/512/168/168726.png" alt="Profile Picture">
-              <p class="stuf">&lt; I build stuff 🚀 /&gt;</p>
-          </div>
-          <div class="profile-details">
-              <h1>Pratyush Dulal</h1>
-              <h2>Developing Developer</h2>
-              <p>I'm very good. I can do many things.I will be able to do things as your requirement</p>
-              <div class="buttons">
-                  <a class="res" href="https://docs.google.com/document/d/1RGJCv7eiF_ragSWwIOQLtSDV3rQLXpVTk77zLIY9pgE/edit?usp=sharing">Resume</a>
-              </div>
+      <div class="profile-details">
+          <h1>About Me</h1>
+          <h2>Content Creator & Digital Media Enthusiast</h2>
+          <p>
+            I specialize in <b>fitness, lifestyle, and multimedia content creation</b>.  
+            With experience in video editing, motion graphics, and brand collaborations,  
+            I aim to create authentic and impactful digital stories.  
+          </p>
+          <div class="buttons">
+              <a class="btn" target="_blank" href="https://docs.google.com/document/d/1RGJCv7eiF_ragSWwIOQLtSDV3rQLXpVTk77zLIY9pgE/edit?usp=sharing">View Resume</a>
           </div>
       </div>
   </div> 
-  <H1 class="hahah">About Me</H1>
+
   <div class="about-details-container">
-      <div class="about-containers">
-        <div class="details-container" id="boxess">
-          <img
-            src="./assets/img/experience.png"
-            alt="Experience icon"
-            class="icon"
-          />
-          <h3>Experience</h3>
-          <p>3 months Internship<br/>Kavya School Plus Two</p>
-        </div>
-        <div class="details-container" id="boxes" >
-          <img
-            src="./assets/img/education.png"
-            alt="Education icon"
-            class="icon"
-          />
-          <h3>Education</h3>
-          <p>11 Passed<br />Science</p>
-        </div>
+      <div class="details-container">
+        <h3>Experience</h3>
+        <p>Freelance Creator<br/>Brand Collaborations (Bhagwan Essentials, Karmalaya Foundation, Shivapuri Fabric)</p>
+      </div>
+      <div class="details-container">
+        <h3>Education</h3>
+        <p>Bachelor's (AI & Database Mgmt)<br/>+2 Science, Kavya School</p>
       </div>
   </div>  
 </section>
+
 <section id="project">
     <div class="container">
-        <h1 id="myyy">My Featured Projects</h1>
-        <p class="subtitle">Here are some of the projects I have worked on that I'm most proud of</p>
+        <h1>My Featured Projects</h1>
+        <p class="subtitle">Here are some of the projects I’ve worked on</p>
         <div class="projects">
-            <div class="project" id="project">
+            <div class="project">
                 <img src="https://s3-alpha.figma.com/hub/file/3673526927/3697d023-a671-434a-b537-2b8ed7b0a29a-cover.png" alt="Project 1">
-                <h3>Project 1</h3>
-                <p>A web app that helps users build their projects. Built with HTML, CSS, etc.</p>
+                <h3>Promo Video</h3>
+                <p>Created engaging promo video content for a local brand campaign.</p>
                 <div class="tags">
-                    <span class="tag">HTML</span>
-                    <span class="tag">CSS</span>
-                    <span class="tag">JS</span>
+                    <span class="tag">CapCut</span>
+                    <span class="tag">After Effects</span>
                 </div>
             </div>
-            <div class="project" id="project1" >
+            <div class="project">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXWB359VCNg0A3HazMK11ESQSTlb0UFSW9vg&s" alt="Project 2">
-                <h3>Project 2</h3>
-                <p>A web app that helps users build their projects. Built with HTML, CSS, etc.</p>
+                <h3>Fitness Reels</h3>
+                <p>Produced gym reels and motivational edits for social platforms.</p>
                 <div class="tags">
-                    <span class="tag">HTML</span>
-                    <span class="tag">CSS</span>
+                    <span class="tag">Instagram</span>
+                    <span class="tag">TikTok</span>
                 </div>
             </div>
-            <div class="project" id="project2">
-                <img src="https://s3-alpha.figma.com/hub/file/1898997418/0414088d-e063-475f-9481-c75a40418e1e-cover.png" alt="Project 2">
-                <h3>Project 3</h3>
-                <p>A web app that helps users build their projects. Built with HTML, CSS, etc.</p>
-                <div class="tags">
-                    <span class="tag">HTML</span>
-                    <span class="tag">CSS</span>
-                </div>
-            </div>
-            <div class="project" id="project3">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHBwueHeQ0j5JZPUBFQbF_bh47u2LkWSg3Kg&s" alt="Project 2">
-                <h3>Project 4</h3>
-                <p>A web app that helps users build their projects. Built with HTML, CSS, etc.</p>
-                <div class="tags">
-                    <span class="tag">HTML</span>
-                    <span class="tag">CSS</span>
-                </div>
-            </div>
-            
         </div>
     </div>
 </section>
-<section id="contact">
-        <div class="vl"></div>
-    <div class = "contact-bg">
-  
-        <h2 class="heyu" >Contact us</h2>
-<hr>
-        <p class = "text" >"Reach out, Connect, Thrive!"</p>
+
+<section id="brands">
+  <div class="container">
+    <h1>Brands I’ve Worked With</h1>
+    <p class="subtitle">Some amazing collaborations</p>
+    <div class="brands">
+      <div class="brand">
+        <img src="https://via.placeholder.com/300x150?text=Bhagwan+Essentials" alt="Bhagwan Essentials">
+        <h3>Bhagwan Essentials</h3>
       </div>
-      <div class="form-section">
-        <h2 class="uarego">Get in touch</h2>
-        <p class="sub" >Connect with us and get any type of help u want</p>
-        <form>
-            <label for="name" >Name *</label>
-            <input type="text" id="name" name="name" required>
-            
-            <label for="email">Email *</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="message">Message *</label>
-            <textarea id="message"></textarea>
-            
-            <label >Inquires</label>
-            <input type="text" id="security" name="security" required>
-            
-            <button class="buty" type="submit">Submit</button>
-        </form>
+      <div class="brand">
+        <img src="https://via.placeholder.com/300x150?text=Karmalaya+Foundation" alt="Karmalaya Foundation">
+        <h3>Karmalaya Foundation</h3>
+      </div>
+      <div class="brand">
+        <img src="https://via.placeholder.com/300x150?text=Shivapuri+Fabric" alt="Shivapuri Fabric">
+        <h3>Shivapuri Fabric</h3>
+      </div>
     </div>
-    <div class="con">
-        <img src="./assets/img/side.jpg" alt="">
-     </div>
-     <div class="map">
-        <div ><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=new%20baneshwor+(Vortex%20Gaming)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
-    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-bg" style="text-align:center;">
+    <h2>Contact Me</h2>
+    <p>"Reach out, Connect, Thrive!"</p>
+  </div>
+  <div class="form-section" style="max-width:600px; margin:auto;">
+    <h2>Get in touch</h2>
+    <form>
+      <label for="name">Name *</label>
+      <input type="text" id="name" name="name" required style="width:100%;padding:8px;margin:5px 0;">
+      
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" required style="width:100%;padding:8px;margin:5px 0;">
+      
+      <label for="message">Message *</label>
+      <textarea id="message" style="width:100%;padding:8px;margin:5px 0;"></textarea>
+      
+      <button class="btn" type="submit">Submit</button>
+    </form>
+  </div>
 </section>
 </body>
 </html>

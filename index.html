@@ -3,338 +3,862 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pratyush Dulal | Content Creator</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Pratyush Dulal — Content Creator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --cream: #f5f0e8;
+      --accent: #ff4d1c;
+      --gold: #d4a843;
+      --mid: #1a1a1a;
+      --muted: #888;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #222;
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
     }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 40px;
-      background: #007bff;
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+    /* Custom cursor */
+    .cursor {
+      position: fixed; width: 12px; height: 12px;
+      background: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+    }
+    .cursor-trail {
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid rgba(255,77,28,0.4); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease, left 0.18s ease, top 0.18s ease;
     }
 
-    header .navtex {
-      display: flex;
-      list-style: none;
-      gap: 20px;
+    /* Noise overlay */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03; pointer-events: none; z-index: 1000;
     }
 
-    header .navtex a {
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 60px;
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,10,0.7);
+      animation: slideDown 0.8s ease both;
+    }
+    @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.1rem; letter-spacing: 0.05em;
+      color: var(--cream);
       text-decoration: none;
-      color: white;
-      font-weight: bold;
-      transition: 0.3s;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+      font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 1px; background: var(--accent); transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .nav-links a:hover { color: var(--cream); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-cta {
+      background: var(--accent); color: white;
+      padding: 10px 22px; border-radius: 40px;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
+      text-decoration: none; text-transform: uppercase;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-cta:hover { transform: scale(1.04); box-shadow: 0 0 24px rgba(255,77,28,0.5); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+      padding: 120px 60px 60px;
+      position: relative; overflow: hidden;
     }
 
-    header .navtex a:hover {
-      color: #ffde59;
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(212,168,67,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse 50% 60% at 10% 80%, rgba(255,77,28,0.06) 0%, transparent 50%);
     }
 
-    .home-container {
-      text-align: center;
-      padding: 100px 20px;
+    .hero-grid-lines {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
     }
 
-    .introtext .h1 {
-      font-size: 2.5rem;
-      margin: 0;
-    }
+    .hero-left { position: relative; z-index: 2; }
 
-    .introtext .h2 {
-      font-size: 2rem;
-      margin: 10px 0;
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,77,28,0.12); border: 1px solid rgba(255,77,28,0.3);
+      color: var(--accent); padding: 6px 16px; border-radius: 40px;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 32px;
+      animation: fadeUp 0.8s 0.3s ease both;
     }
+    .hero-tag .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
 
-    .introtext .h3 {
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: #555;
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      line-height: 1.0; letter-spacing: -0.02em;
+      color: var(--cream);
+      animation: fadeUp 0.8s 0.5s ease both;
     }
+    .hero-name em { color: var(--accent); font-style: italic; }
 
-    .intext p {
-      max-width: 600px;
-      margin: 20px auto;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-
-    .buttons {
-      margin: 20px 0;
-    }
-
-    .btn, .btnn {
-      padding: 10px 20px;
-      margin: 5px;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      display: inline-block;
-    }
-
-    .btn {
-      background: #007bff;
-      color: white;
-    }
-
-    .btnn {
-      background: #ffde59;
-      color: #222;
-    }
-
-    .iconlist {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
+    .hero-role {
+      font-family: 'Syne', sans-serif; font-size: 1rem;
+      color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase;
       margin-top: 20px;
+      animation: fadeUp 0.8s 0.7s ease both;
     }
 
-    .iconlist i {
-      font-size: 1.5rem;
-      color: #007bff;
-      transition: 0.3s;
+    .hero-bio {
+      max-width: 420px; margin-top: 28px;
+      font-size: 1rem; line-height: 1.8; color: rgba(245,240,232,0.6);
+      animation: fadeUp 0.8s 0.9s ease both;
     }
 
-    .iconlist i:hover {
-      color: #ffde59;
+    .hero-actions {
+      display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap;
+      animation: fadeUp 0.8s 1.1s ease both;
+    }
+    .btn-primary {
+      background: var(--accent); color: white;
+      padding: 14px 32px; border-radius: 50px; border: none;
+      font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: transform 0.2s, box-shadow 0.3s;
+      cursor: none;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(255,77,28,0.4); }
+    .btn-outline {
+      background: transparent; color: var(--cream);
+      padding: 14px 32px; border-radius: 50px;
+      border: 1px solid rgba(245,240,232,0.2);
+      font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: border-color 0.3s, color 0.3s;
+      cursor: none;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-socials {
+      display: flex; gap: 16px; margin-top: 40px;
+      animation: fadeUp 0.8s 1.3s ease both;
+    }
+    .hero-socials a {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 1px solid var(--border); background: rgba(255,255,255,0.03);
+      display: grid; place-items: center; color: var(--muted); font-size: 1rem;
+      text-decoration: none; transition: border-color 0.3s, color 0.3s, transform 0.3s;
+      cursor: none;
+    }
+    .hero-socials a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+
+    /* Hero right – visual element */
+    .hero-right {
+      position: relative; z-index: 2;
+      display: flex; justify-content: center; align-items: center;
+      animation: fadeIn 1.2s 0.6s ease both;
     }
 
-    section {
-      padding: 60px 20px;
+    .hero-visual {
+      position: relative; width: 420px; height: 520px;
     }
 
-    .about-container {
-      text-align: center;
+    .hero-card {
+      position: absolute;
+      background: var(--mid); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      transition: transform 0.4s;
     }
 
-    .profile-details h1 {
-      margin: 10px 0;
-      font-size: 2rem;
+    .hero-card-main {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 30px;
+    }
+    .avatar-ring {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--gold));
+      display: grid; place-items: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.5rem; color: white;
+      margin-bottom: 20px;
+      box-shadow: 0 0 60px rgba(255,77,28,0.3);
+    }
+    .card-label { font-family: 'Syne', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+    .card-name { font-family: 'DM Serif Display', serif; font-size: 2rem; margin-top: 6px; }
+    .card-role-tag {
+      display: inline-block; margin-top: 12px;
+      background: rgba(255,77,28,0.15); border: 1px solid rgba(255,77,28,0.3);
+      color: var(--accent); padding: 5px 14px; border-radius: 40px;
+      font-size: 0.75rem; letter-spacing: 0.08em;
     }
 
-    .profile-details h2 {
-      font-weight: 400;
-      color: #555;
+    .stat-chip {
+      position: absolute; background: rgba(26,26,26,0.95);
+      border: 1px solid var(--border); border-radius: 14px; padding: 14px 20px;
+      backdrop-filter: blur(20px);
+    }
+    .stat-chip .num { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--gold); }
+    .stat-chip .label { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+    .chip-brands { top: -20px; right: -30px; animation: float1 4s ease-in-out infinite; }
+    .chip-exp { bottom: 60px; left: -50px; animation: float2 4s ease-in-out infinite; }
+
+    @keyframes float1 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes float2 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+    @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: none; opacity: 1; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ─── MARQUEE ─── */
+    .marquee-wrap {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 18px 0; overflow: hidden;
+      background: rgba(212,168,67,0.04);
+    }
+    .marquee-track {
+      display: flex; gap: 60px; width: max-content;
+      animation: marquee 20s linear infinite;
+    }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-item {
+      display: flex; align-items: center; gap: 16px; white-space: nowrap;
+      font-family: 'Syne', sans-serif; font-size: 0.8rem;
+      font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+    }
+    .marquee-item span { color: var(--gold); font-size: 1.2rem; }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 120px 60px; }
+    .section-label {
+      font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent);
+      display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+    }
+    .section-label::before { content: ''; width: 30px; height: 1px; background: var(--accent); }
+    .section-title {
+      font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.1; color: var(--cream);
+    }
+    .section-title em { color: var(--gold); font-style: italic; }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--mid); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+      margin-top: 60px;
+    }
+    .about-left .big-quote {
+      font-family: 'DM Serif Display', serif; font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.5; color: var(--cream); margin-bottom: 30px;
+    }
+    .about-left .big-quote em { color: var(--gold); font-style: italic; }
+    .about-text { color: rgba(245,240,232,0.6); line-height: 1.9; margin-bottom: 20px; }
+
+    .about-right { display: flex; flex-direction: column; gap: 24px; }
+    .about-card {
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px; position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .about-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .about-card:hover { border-color: rgba(255,77,28,0.3); transform: translateX(6px); }
+    .about-card:hover::before { transform: scaleX(1); }
+    .about-card h4 {
+      font-family: 'Syne', sans-serif; font-size: 0.75rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    }
+    .about-card p { color: rgba(245,240,232,0.6); font-size: 0.95rem; line-height: 1.7; }
+
+    .skills-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+    .skill-pill {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      color: var(--cream); padding: 7px 18px; border-radius: 40px;
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .skill-pill:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ─── PROJECTS ─── */
+    #projects { background: var(--black); }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px; margin-top: 60px;
+    }
+    .project-card {
+      background: var(--mid); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      transition: transform 0.4s, box-shadow 0.4s;
+      cursor: none;
+    }
+    .project-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+    .project-card:hover .project-img img { transform: scale(1.06); }
+
+    .project-img { height: 220px; overflow: hidden; position: relative; }
+    .project-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .project-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 60%);
+    }
+    .project-number {
+      position: absolute; top: 16px; right: 16px;
+      font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 800;
+      color: var(--accent); letter-spacing: 0.1em;
     }
 
-    .about-details-container {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 30px;
-      flex-wrap: wrap;
+    .project-body { padding: 28px; }
+    .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .project-tag {
+      background: rgba(255,77,28,0.1); border: 1px solid rgba(255,77,28,0.2);
+      color: var(--accent); padding: 4px 12px; border-radius: 40px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
+    }
+    .project-title {
+      font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin-bottom: 10px;
+    }
+    .project-desc { color: rgba(245,240,232,0.5); font-size: 0.9rem; line-height: 1.7; }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 20px;
+      font-family: 'Syne', sans-serif; font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+      text-decoration: none; transition: gap 0.3s;
+    }
+    .project-link:hover { gap: 12px; }
+
+    /* ─── BRANDS ─── */
+    #brands { background: var(--mid); }
+    .brands-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px;
+    }
+    .brand-card {
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      border-radius: 20px; padding: 48px 32px; text-align: center;
+      position: relative; overflow: hidden;
+      transition: border-color 0.4s, transform 0.3s;
+      cursor: none;
+    }
+    .brand-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(212,168,67,0.08) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .brand-card:hover { border-color: rgba(212,168,67,0.4); transform: translateY(-4px); }
+    .brand-card:hover::after { opacity: 1; }
+
+    .brand-icon {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(212,168,67,0.2), rgba(255,77,28,0.1));
+      border: 1px solid rgba(212,168,67,0.3);
+      display: grid; place-items: center; margin: 0 auto 24px;
+      font-size: 1.8rem;
+    }
+    .brand-name {
+      font-family: 'DM Serif Display', serif; font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+    .brand-desc { color: rgba(245,240,232,0.5); font-size: 0.87rem; line-height: 1.7; }
+    .brand-collab {
+      display: inline-block; margin-top: 16px;
+      font-family: 'Syne', sans-serif; font-size: 0.68rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);
     }
 
-    .details-container {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      width: 250px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    /* ─── CONTACT ─── */
+    #contact { background: var(--black); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 60px; align-items: start;
     }
-
-    .projects, .brands {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
+    .contact-left .contact-quote {
+      font-family: 'DM Serif Display', serif; font-size: 2rem; line-height: 1.4;
+      margin-bottom: 30px; color: var(--cream);
     }
-
-    .project, .brand {
-      background: #fff;
-      border-radius: 10px;
-      padding: 15px;
-      width: 280px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
+    .contact-left .contact-quote em { color: var(--accent); font-style: italic; }
+    .contact-info { display: flex; flex-direction: column; gap: 20px; }
+    .contact-row {
+      display: flex; align-items: center; gap: 16px;
+      padding-bottom: 20px; border-bottom: 1px solid var(--border);
     }
-
-    .project img, .brand img {
-      width: 100%;
-      border-radius: 8px;
+    .contact-icon {
+      width: 44px; height: 44px; background: rgba(255,77,28,0.1);
+      border: 1px solid rgba(255,77,28,0.2); border-radius: 12px;
+      display: grid; place-items: center; color: var(--accent); font-size: 1rem;
     }
+    .contact-row p { font-size: 0.8rem; color: var(--muted); margin-bottom: 2px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .contact-row a { color: var(--cream); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
 
-    .tags {
-      margin-top: 10px;
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label {
+      font-family: 'Syne', sans-serif; font-size: 0.72rem;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
     }
-
-    .tag {
-      background: #007bff;
-      color: white;
-      padding: 3px 8px;
-      border-radius: 4px;
-      margin: 2px;
-      font-size: 0.8rem;
+    .form-group input, .form-group textarea {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px 20px; color: var(--cream);
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; outline: none;
+      transition: border-color 0.3s;
     }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: rgba(255,77,28,0.5);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-submit {
+      background: var(--accent); color: white; border: none;
+      padding: 16px 36px; border-radius: 50px; font-family: 'Syne', sans-serif;
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: none; transition: transform 0.2s, box-shadow 0.3s; align-self: flex-start;
+    }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(255,77,28,0.4); }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-      }
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-copy { color: var(--muted); font-size: 0.85rem; }
+    .footer-copy span { color: var(--accent); }
+    .footer-socials { display: flex; gap: 12px; }
+    .footer-socials a {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid var(--border); display: grid; place-items: center;
+      color: var(--muted); font-size: 0.9rem; text-decoration: none;
+      transition: border-color 0.3s, color 0.3s; cursor: none;
+    }
+    .footer-socials a:hover { border-color: var(--accent); color: var(--accent); }
 
-      .navtex {
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 10px;
-      }
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
 
-      .introtext .h1 {
-        font-size: 2rem;
-      }
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+      .hero-right { display: none; }
+      section { padding: 80px 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 50px; }
+      .brands-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; padding: 30px 24px; }
     }
   </style>
 </head>
 <body>
-<header> 
-  <nav>
-      <ul class="navtex">
-          <li><a href="#Home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#project">Projects</a></li>
-          <li><a href="#brands">Brands</a></li>
-          <li><a href="#contact">Contact</a></li>    
-      </ul>
-  </nav>
-  <p class="upper"><b>Pratyush Dulal</b></p>
-</header>
 
-<section id="Home">
-  <div class="home-container">
-      <div class="introtext">
-          <h1 class="h1">Hi,</h1>
-          <h2 class="h2">I’m <span style="color:#007bff;">Pratyush Dulal</span></h2>
-          <h3 class="h3">Content Creator | Fitness Enthusiast | Digital Media</h3>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a class="nav-logo" href="#hero">P<span>.</span>Dulal</a>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#brands">Brands</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Let's Talk →</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+
+  <div class="hero-left">
+    <div class="hero-tag">
+      <span class="dot"></span>
+      Available for collaborations
+    </div>
+    <h1 class="hero-name">Pratyush<br><em>Dulal.</em></h1>
+    <p class="hero-role">Content Creator · Digital Media · Fitness</p>
+    <p class="hero-bio">
+      I create compelling visual stories for brands and audiences — specialising in fitness content, lifestyle reels, video editing, and brand campaigns that actually connect.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#projects">
+        View My Work <i class="fa-solid fa-arrow-right"></i>
+      </a>
+      <a class="btn-outline" href="#contact">
+        Get in Touch
+      </a>
+    </div>
+    <div class="hero-socials">
+      <a href="https://www.instagram.com/pratyush_dulal/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/pratyush-dulal/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://github.com/CWP-creator" target="_blank"><i class="fa-brands fa-github"></i></a>
+      <a href="https://x.com/pratyushdulal69" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-card hero-card-main">
+        <div class="avatar-ring">P</div>
+        <div class="card-label">Content Creator</div>
+        <div class="card-name">Pratyush Dulal</div>
+        <div class="card-role-tag">Kathmandu, Nepal 🇳🇵</div>
       </div>
-      <div class="intext">
-        <p>
-          I’m a <b>content creator</b> passionate about <b>gym, lifestyle, and digital media</b>.  
-          I’ve worked with brands like <b>Bhagwan Essentials</b>, <b>Karmalaya Foundation</b>, and <b>Shivapuri Fabric</b>  
-          delivering engaging campaigns, reels, and creative projects.  
-        </p>
+      <div class="stat-chip chip-brands">
+        <div class="num">3+</div>
+        <div class="label">Brand Collabs</div>
       </div>
-      <div class="buttons">
-        <a href="#project" class="btn">View My Work</a>
-        <a href="#contact" class="btnn">Contact Me</a>
+      <div class="stat-chip chip-exp">
+        <div class="num">2yr</div>
+        <div class="label">Experience</div>
       </div>
-      <div class="iconlist">
-        <a target="_blank" href="https://www.instagram.com/pratyush_dulal/"><i class="fa">&#xf16d;</i></a>
-        <a target="_blank" href="https://www.linkedin.com/in/pratyush-dulal/"><i class="fa">&#xf0e1;</i></a>
-        <a target="_blank" href="https://github.com/CWP-creator"><i class="fa">&#xf09b;</i></a>
-        <a target="_blank" href="https://x.com/pratyushdulal69"><i class="fa">&#xf099;</i></a>
-      </div>
+    </div>
   </div>
 </section>
 
+<!-- ─── MARQUEE ─── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span>✦</span> Video Editing</div>
+    <div class="marquee-item"><span>✦</span> Brand Campaigns</div>
+    <div class="marquee-item"><span>✦</span> Motion Graphics</div>
+    <div class="marquee-item"><span>✦</span> Fitness Content</div>
+    <div class="marquee-item"><span>✦</span> Reels & Shorts</div>
+    <div class="marquee-item"><span>✦</span> Digital Storytelling</div>
+    <div class="marquee-item"><span>✦</span> Social Media</div>
+    <div class="marquee-item"><span>✦</span> Creative Direction</div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item"><span>✦</span> Video Editing</div>
+    <div class="marquee-item"><span>✦</span> Brand Campaigns</div>
+    <div class="marquee-item"><span>✦</span> Motion Graphics</div>
+    <div class="marquee-item"><span>✦</span> Fitness Content</div>
+    <div class="marquee-item"><span>✦</span> Reels & Shorts</div>
+    <div class="marquee-item"><span>✦</span> Digital Storytelling</div>
+    <div class="marquee-item"><span>✦</span> Social Media</div>
+    <div class="marquee-item"><span>✦</span> Creative Direction</div>
+  </div>
+</div>
+
+<!-- ─── ABOUT ─── -->
 <section id="about">
-  <div class="about-container">
-      <div class="profile-details">
-          <h1>About Me</h1>
-          <h2>Content Creator & Digital Media Enthusiast</h2>
-          <p>
-            I specialize in <b>fitness, lifestyle, and multimedia content creation</b>.  
-            With experience in video editing, motion graphics, and brand collaborations,  
-            I aim to create authentic and impactful digital stories.  
-          </p>
-          <div class="buttons">
-              <a class="btn" target="_blank" href="https://docs.google.com/document/d/1RGJCv7eiF_ragSWwIOQLtSDV3rQLXpVTk77zLIY9pgE/edit?usp=sharing">View Resume</a>
-          </div>
-      </div>
-  </div> 
+  <div class="section-label reveal">About Me</div>
+  <h2 class="section-title reveal">Crafting <em>authentic</em><br>digital stories</h2>
 
-  <div class="about-details-container">
-      <div class="details-container">
-        <h3>Experience</h3>
-        <p>Freelance Creator<br/>Brand Collaborations (Bhagwan Essentials, Karmalaya Foundation, Shivapuri Fabric)</p>
+  <div class="about-grid">
+    <div class="about-left reveal">
+      <p class="big-quote">
+        I believe content should feel <em>real</em> — not polished to the point of being forgettable.
+      </p>
+      <p class="about-text">
+        I'm Pratyush — a content creator and digital media enthusiast based in Kathmandu, Nepal. I specialise in fitness and lifestyle content, building visual narratives that brands and audiences genuinely connect with.
+      </p>
+      <p class="about-text">
+        With a background in AI & Database Management and hands-on experience in video editing, motion graphics, and social media, I bring both technical precision and creative instinct to every project.
+      </p>
+      <div class="skills-row">
+        <span class="skill-pill">CapCut</span>
+        <span class="skill-pill">After Effects</span>
+        <span class="skill-pill">Premiere Pro</span>
+        <span class="skill-pill">Figma</span>
+        <span class="skill-pill">Instagram Reels</span>
+        <span class="skill-pill">TikTok</span>
+        <span class="skill-pill">Photography</span>
+        <span class="skill-pill">Copywriting</span>
       </div>
-      <div class="details-container">
-        <h3>Education</h3>
-        <p>Bachelor's (AI & Database Mgmt)<br/>+2 Science, Kavya School</p>
+      <div style="margin-top:32px;">
+        <a class="btn-primary" href="https://docs.google.com/document/d/1RGJCv7eiF_ragSWwIOQLtSDV3rQLXpVTk77zLIY9pgE/edit?usp=sharing" target="_blank">
+          View Resume <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
       </div>
-  </div>  
+    </div>
+
+    <div class="about-right">
+      <div class="about-card reveal">
+        <h4>Experience</h4>
+        <p>Freelance Content Creator with brand collaborations across lifestyle, fitness, and e-commerce verticals. Delivered engaging campaigns, reel series, and creative direction.</p>
+      </div>
+      <div class="about-card reveal" style="transition-delay:0.1s">
+        <h4>Education</h4>
+        <p>Bachelor's in AI & Database Management (ongoing). Completed +2 Science from Kavya School — building a bridge between technology and creative media.</p>
+      </div>
+      <div class="about-card reveal" style="transition-delay:0.2s">
+        <h4>What I bring</h4>
+        <p>A sharp eye for aesthetics, a deep understanding of what performs on social media, and the technical skills to bring a vision from concept to publish-ready content.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="project">
-    <div class="container">
-        <h1>My Featured Projects</h1>
-        <p class="subtitle">Here are some of the projects I’ve worked on</p>
-        <div class="projects">
-            <div class="project">
-                <img src="https://s3-alpha.figma.com/hub/file/3673526927/3697d023-a671-434a-b537-2b8ed7b0a29a-cover.png" alt="Project 1">
-                <h3>Promo Video</h3>
-                <p>Created engaging promo video content for a local brand campaign.</p>
-                <div class="tags">
-                    <span class="tag">CapCut</span>
-                    <span class="tag">After Effects</span>
-                </div>
-            </div>
-            <div class="project">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXWB359VCNg0A3HazMK11ESQSTlb0UFSW9vg&s" alt="Project 2">
-                <h3>Fitness Reels</h3>
-                <p>Produced gym reels and motivational edits for social platforms.</p>
-                <div class="tags">
-                    <span class="tag">Instagram</span>
-                    <span class="tag">TikTok</span>
-                </div>
-            </div>
+<!-- ─── PROJECTS ─── -->
+<section id="projects">
+  <div class="section-label reveal">Selected Work</div>
+  <h2 class="section-title reveal">Projects that <em>moved</em><br>the needle</h2>
+
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-img">
+        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=600&q=80" alt="Promo Video">
+        <div class="project-img-overlay"></div>
+        <div class="project-number">01</div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="project-tag">CapCut</span>
+          <span class="project-tag">After Effects</span>
         </div>
+        <h3 class="project-title">Brand Promo Video</h3>
+        <p class="project-desc">Created a high-energy promo video series for a local brand campaign — concept to final cut in under a week, driving significant reach.</p>
+        <a class="project-link" href="#contact">Inquire <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
     </div>
+
+    <div class="project-card reveal" style="transition-delay:0.1s">
+      <div class="project-img">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="Fitness Reels">
+        <div class="project-img-overlay"></div>
+        <div class="project-number">02</div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="project-tag">Instagram</span>
+          <span class="project-tag">TikTok</span>
+        </div>
+        <h3 class="project-title">Fitness Reel Series</h3>
+        <p class="project-desc">Produced a 12-part gym reel series featuring workout routines, transformation content, and motivational edits optimised for social platforms.</p>
+        <a class="project-link" href="#contact">Inquire <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="transition-delay:0.2s">
+      <div class="project-img">
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="Digital Campaign">
+        <div class="project-img-overlay"></div>
+        <div class="project-number">03</div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="project-tag">Figma</span>
+          <span class="project-tag">Motion Graphics</span>
+        </div>
+        <h3 class="project-title">Digital Campaign</h3>
+        <p class="project-desc">End-to-end digital campaign for a lifestyle brand — including visual identity, social creatives, and animated story formats.</p>
+        <a class="project-link" href="#contact">Inquire <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- ─── BRANDS ─── -->
 <section id="brands">
-  <div class="container">
-    <h1>Brands I’ve Worked With</h1>
-    <p class="subtitle">Some amazing collaborations</p>
-    <div class="brands">
-      <div class="brand">
-        <img src="https://via.placeholder.com/300x150?text=Bhagwan+Essentials" alt="Bhagwan Essentials">
-        <h3>Bhagwan Essentials</h3>
-      </div>
-      <div class="brand">
-        <img src="https://via.placeholder.com/300x150?text=Karmalaya+Foundation" alt="Karmalaya Foundation">
-        <h3>Karmalaya Foundation</h3>
-      </div>
-      <div class="brand">
-        <img src="https://via.placeholder.com/300x150?text=Shivapuri+Fabric" alt="Shivapuri Fabric">
-        <h3>Shivapuri Fabric</h3>
-      </div>
+  <div class="section-label reveal">Collaborations</div>
+  <h2 class="section-title reveal">Brands I've <em>partnered</em><br>with</h2>
+
+  <div class="brands-grid">
+    <div class="brand-card reveal">
+      <div class="brand-icon">🌿</div>
+      <h3 class="brand-name">Bhagwan Essentials</h3>
+      <p class="brand-desc">Developed product-focused content and social campaigns highlighting the brand's wellness and lifestyle positioning.</p>
+      <span class="brand-collab">✦ Content Strategy & Video</span>
+    </div>
+
+    <div class="brand-card reveal" style="transition-delay:0.12s">
+      <div class="brand-icon">🏛️</div>
+      <h3 class="brand-name">Karmalaya Foundation</h3>
+      <p class="brand-desc">Created mission-driven storytelling content that raised awareness and drove community engagement for the foundation.</p>
+      <span class="brand-collab">✦ Campaign & Reels</span>
+    </div>
+
+    <div class="brand-card reveal" style="transition-delay:0.24s">
+      <div class="brand-icon">🧵</div>
+      <h3 class="brand-name">Shivapuri Fabric</h3>
+      <p class="brand-desc">Produced editorial-style product shoots and promotional videos showcasing the brand's textile craftsmanship.</p>
+      <span class="brand-collab">✦ Visual Production</span>
     </div>
   </div>
 </section>
 
+<!-- ─── CONTACT ─── -->
 <section id="contact">
-  <div class="contact-bg" style="text-align:center;">
-    <h2>Contact Me</h2>
-    <p>"Reach out, Connect, Thrive!"</p>
-  </div>
-  <div class="form-section" style="max-width:600px; margin:auto;">
-    <h2>Get in touch</h2>
-    <form>
-      <label for="name">Name *</label>
-      <input type="text" id="name" name="name" required style="width:100%;padding:8px;margin:5px 0;">
-      
-      <label for="email">Email *</label>
-      <input type="email" id="email" name="email" required style="width:100%;padding:8px;margin:5px 0;">
-      
-      <label for="message">Message *</label>
-      <textarea id="message" style="width:100%;padding:8px;margin:5px 0;"></textarea>
-      
-      <button class="btn" type="submit">Submit</button>
-    </form>
+  <div class="section-label reveal">Contact</div>
+  <h2 class="section-title reveal">Let's make something <em>great</em></h2>
+
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <p class="contact-quote">
+        Open to freelance projects, brand collaborations, and <em>creative partnerships.</em>
+      </p>
+      <div class="contact-info">
+        <div class="contact-row">
+          <div class="contact-icon"><i class="fa-brands fa-instagram"></i></div>
+          <div>
+            <p>Instagram</p>
+            <a href="https://www.instagram.com/pratyush_dulal/" target="_blank">@pratyush_dulal</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+          <div>
+            <p>LinkedIn</p>
+            <a href="https://www.linkedin.com/in/pratyush-dulal/" target="_blank">pratyush-dulal</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon"><i class="fa-brands fa-x-twitter"></i></div>
+          <div>
+            <p>X / Twitter</p>
+            <a href="https://x.com/pratyushdulal69" target="_blank">@pratyushdulal69</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form reveal" style="transition-delay:0.15s">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="e.g. Sita Rai">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" placeholder="Tell me about your project, collaboration idea, or just say hi..."></textarea>
+      </div>
+      <button class="form-submit" onclick="handleSubmit()">
+        Send Message <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </div>
   </div>
 </section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <p class="footer-copy">© 2025 <span>Pratyush Dulal</span> — All rights reserved.</p>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/pratyush_dulal/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/in/pratyush-dulal/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="https://github.com/CWP-creator" target="_blank"><i class="fa-brands fa-github"></i></a>
+    <a href="https://x.com/pratyushdulal69" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+  </div>
+</footer>
+
+<script>
+  // ── Custom cursor
+  const cursor = document.getElementById('cursor');
+  const trail = document.getElementById('cursorTrail');
+  let tx = 0, ty = 0, cx = 0, cy = 0;
+
+  document.addEventListener('mousemove', e => {
+    tx = e.clientX; ty = e.clientY;
+    cursor.style.left = tx + 'px'; cursor.style.top = ty + 'px';
+  });
+
+  function animateTrail() {
+    cx += (tx - cx) * 0.12;
+    cy += (ty - cy) * 0.12;
+    trail.style.left = cx + 'px'; trail.style.top = cy + 'px';
+    requestAnimationFrame(animateTrail);
+  }
+  animateTrail();
+
+  document.querySelectorAll('a, button, .project-card, .brand-card, .about-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+      cursor.style.background = 'rgba(255,77,28,0.3)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      cursor.style.background = 'var(--accent)';
+    });
+  });
+
+  // ── Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 0);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── Contact form
+  function handleSubmit() {
+    const btn = document.querySelector('.form-submit');
+    btn.textContent = '✓ Message Sent!';
+    btn.style.background = '#1a8a4a';
+    setTimeout(() => {
+      btn.innerHTML = 'Send Message <i class="fa-solid fa-paper-plane"></i>';
+      btn.style.background = '';
+    }, 3000);
+  }
+
+  // ── Nav active states on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--cream)' : '';
+    });
+  });
+</script>
 </body>
 </html>
